@@ -2,17 +2,57 @@
 //
 
 #include "stdafx.h"
+#include "playlist.h"
 
 using namespace std;
 
 void main(void)
 {
+	Playlist playlistObj;
+	vector <string> musicVector;
+	unsigned char key;
+	bool exitProgram = false;
+	string fileName;
+	string musicPath;
+
 	cout << "Welcome to the Simple Audio Player" << endl;
 	cout << "Experimental Version 1.0" << endl;
 	
-	PlaySound( TEXT ("Tiësto  KSHMR feat VASSY   Secrets (Original Mix).WAV") , NULL, SND_ASYNC);
+	musicVector.push_back("Tiësto  KSHMR feat VASSY   Secrets (Original Mix).WAV");
 
-    cin.get(); //waits for user input to terminate
+	while (exitProgram == false)
+	{
+		
+		//will play sounds store on the vector
+		PlaySound( TEXT ("Tiësto  KSHMR feat VASSY   Secrets (Original Mix).WAV") , NULL, SND_ASYNC);
+		cin >> key;
+
+
+
+		switch (key)
+		{
+		case 'q':
+		case 'Q': //exits program
+			exitProgram = true;
+			break;
+		
+		case 'r':
+		case 'R': //reads playlist file
+
+			cout << "Enter playlist file name" << endl;
+			cin >> fileName;
+			musicVector =   playlistObj.readPlaylist(fileName );
+			break;
+		
+		default:
+			cout << "Please enter a valid option" << endl;
+			break;
+
+		}
+	}
+
 }
 
-//Note: Music must be placed in the same folder as source file when compiling or same folder as .exe when running
+/*Note: Music must be placed in the same folder as source file when compiling or same folder as .exe when running
+		Music must be in .WAV format
+*/
