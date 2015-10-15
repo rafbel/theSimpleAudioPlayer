@@ -9,11 +9,12 @@ vector <string> &Playlist::readPlaylist(string fileName)
 
 	playlistFiles.clear(); //clears vector 
 
-	while (1)
+	//while (1)
+	while (getline (in,musicPath) )
 	{
-		if(!(in >> musicPath))
-				break;
-
+		//if(!(in >> musicPath))
+				//break;
+		cout << musicPath << endl;
 		playlistFiles.push_back(musicPath);
 		
 	}

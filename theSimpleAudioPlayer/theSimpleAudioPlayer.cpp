@@ -14,6 +14,7 @@ void main(void)
 	bool exitProgram = false;
 	string fileName;
 	string musicPath;
+	unsigned musicCounter = 0;
 	
 	musicVector.push_back("sample_song");
 
@@ -23,9 +24,9 @@ void main(void)
 		cout << "Experimental Version 1.0" << endl << endl;
 
 		//will play sounds store on the vector
-		wstring song = wstring(musicVector.at(0).begin(), musicVector.at(0).end());
+		wstring song = wstring(musicVector.at(musicCounter).begin(), musicVector.at(musicCounter).end());
 		
-		cout << "Now Playing: " << musicVector.at(0).c_str() << endl;
+		cout << "Now Playing: " << musicVector.at(musicCounter).c_str() << endl;
 		
 		PlaySound( song.c_str()  , NULL, SND_ASYNC | SND_LOOP);
 
@@ -44,7 +45,24 @@ void main(void)
 
 			cout << "Enter playlist file name" << endl;
 			cin >> fileName;
-			musicVector =   playlistObj.readPlaylist(fileName );
+			musicVector =   playlistObj.readPlaylist(fileName);
+			musicCounter = 0; //resets to the start of the playlist
+			break;
+
+		case 'n': //next on playlist
+		case 'N':
+			if ((musicCounter + 1) >= musicVector.size() )
+				musicCounter = 0;
+			else
+				musicCounter++;
+			break;
+
+		case 'b': //next on playlist
+		case 'B':
+			if ((musicCounter - 1) <= 0 )
+				musicCounter = musicVector.size() - 1;
+			else
+				musicCounter--;
 			break;
 		
 		default:
