@@ -14,20 +14,23 @@ void main(void)
 	bool exitProgram = false;
 	string fileName;
 	string musicPath;
-
-	cout << "Welcome to the Simple Audio Player" << endl;
-	cout << "Experimental Version 1.0" << endl;
 	
-	musicVector.push_back("Tiësto  KSHMR feat VASSY   Secrets (Original Mix).WAV");
+	musicVector.push_back("sample_song");
 
 	while (exitProgram == false)
 	{
-		
+		cout << "Welcome to the Simple Audio Player" << endl;
+		cout << "Experimental Version 1.0" << endl << endl;
+
 		//will play sounds store on the vector
-		PlaySound( TEXT ("Tiësto  KSHMR feat VASSY   Secrets (Original Mix).WAV") , NULL, SND_ASYNC);
+		wstring song = wstring(musicVector.at(0).begin(), musicVector.at(0).end());
+		
+		cout << "Now Playing: " << musicVector.at(0).c_str() << endl;
+		
+		PlaySound( song.c_str()  , NULL, SND_ASYNC | SND_LOOP);
+
+		//Receives user input for next action
 		cin >> key;
-
-
 
 		switch (key)
 		{
@@ -49,10 +52,13 @@ void main(void)
 			break;
 
 		}
+		system("CLS");
 	}
 
 }
 
 /*Note: Music must be placed in the same folder as source file when compiling or same folder as .exe when running
 		Music must be in .WAV format
+
+		Graphic interface to be added in the far future
 */
